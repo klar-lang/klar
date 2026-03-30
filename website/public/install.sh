@@ -1,0 +1,82 @@
+#!/bin/sh
+# Klar installer — https://kler.run
+# Usage: curl -fsSL kler.run/install.sh | sh
+
+set -e
+
+REPO="klar-lang/klar"
+INSTALL_DIR="${KLAR_INSTALL_DIR:-/usr/local/bin}"
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BOLD='\033[1m'
+RESET='\033[0m'
+
+info() { printf "${GREEN}>${RESET} %s\n" "$1"; }
+error() { printf "${RED}error${RESET}: %s\n" "$1" >&2; exit 1; }
+
+# Detect OS and architecture
+detect_platform() {
+  OS="$(uname -s)"
+  ARCH="$(uname -m)"
+
+  case "$OS" in
+    Linux)  OS="linux" ;;
+    Darwin) OS="macos" ;;
+    *)      error "Unsupported OS: $OS" ;;
+  esac
+
+  case "$ARCH" in
+    x86_64|amd64)  ARCH="x86_64" ;;
+    arm64|aarch64) ARCH="arm64" ;;
+    *)             error "Unsupported architecture: $ARCH" ;;
+  esac
+
+  PLATFORM="${OS}-${ARCH}"
+}
+
+# Get latest release tag from GitHub
+get_latest_version() {
+  VERSION=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name"' | head -1 | sed 's/.*"tag_name": *"\([^"]*\)".*/\1/')
+  if [ -z "$VERSION" ]; then
+    error "Could not determine latest version. Check https://github.com/${REPO}/releases"
+  fi
+}
+
+# Download and install
+install() {
+  ARTIFACT="klar-${PLATFORM}"
+  URL="https://github.com/${REPO}/releases/download/${VERSION}/${ARTIFACT}"
+
+  info "Detected platform: ${PLATFORM}"
+  info "Installing klar ${VERSION}..."
+
+  TMPDIR=$(mktemp -d)
+  trap 'rm -rf "$TMPDIR"' EXIT
+
+  curl -fsSL "$URL" -o "${TMPDIR}/klar" || error "Download failed. Binary may not exist for ${PLATFORM} yet."
+
+  chmod +x "${TMPDIR}/klar"
+
+  if [ -w "$INSTALL_DIR" ]; then
+    mv "${TMPDIR}/klar" "${INSTALL_DIR}/klar"
+  else
+    info "Requesting sudo to install to ${INSTALL_DIR}..."
+    sudo mv "${TMPDIR}/klar" "${INSTALL_DIR}/klar"
+  fi
+
+  info "${BOLD}klar ${VERSION}${RESET} installed to ${INSTALL_DIR}/klar"
+  info "Run ${BOLD}klar --help${RESET} to get started"
+}
+
+main() {
+  printf "\n  ${BOLD}Klar Installer${RESET}\n"
+  printf "  The AI-first programming language\n\n"
+
+  detect_platform
+  get_latest_version
+  install
+}
+
+main
