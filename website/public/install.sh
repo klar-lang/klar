@@ -36,9 +36,13 @@ detect_platform() {
   PLATFORM="${OS}-${ARCH}"
 }
 
-# Get latest release tag from GitHub
+# Get latest release tag from GitHub (includes pre-releases)
 get_latest_version() {
-  VERSION=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name"' | head -1 | sed 's/.*"tag_name": *"\([^"]*\)".*/\1/')
+  # Try stable release first, then fall back to any release (including pre-release)
+  VERSION=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" 2>/dev/null | grep '"tag_name"' | head -1 | sed 's/.*"tag_name": *"\([^"]*\)".*/\1/')
+  if [ -z "$VERSION" ]; then
+    VERSION=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases" 2>/dev/null | grep '"tag_name"' | head -1 | sed 's/.*"tag_name": *"\([^"]*\)".*/\1/')
+  fi
   if [ -z "$VERSION" ]; then
     error "Could not determine latest version. Check https://github.com/${REPO}/releases"
   fi
