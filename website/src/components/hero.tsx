@@ -132,7 +132,7 @@ export function Hero() {
             <div className="space-y-1.5 px-5 py-4 text-[13px] leading-relaxed">
               <p>
                 <span className="text-[var(--klar-leaf)]">$</span>{" "}
-                <span className="text-white/80">curl -fsSL kler.run/install | sh</span>
+                <span className="text-white/80">curl -fsSL klar.run/install | sh</span>
               </p>
               <p>
                 <span className="text-[var(--klar-leaf)]">$</span>{" "}

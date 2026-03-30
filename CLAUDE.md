@@ -10,7 +10,7 @@
 - `compiler/crates/` — Individual compiler crates
 - `compiler/examples/` — Example .klar programs
 - `compiler/benchmark/` — AI correctness benchmark suite
-- `website/` — kler.run website (Next.js)
+- `website/` — klar.run website (Next.js)
 - `LANGUAGE_SPEC.md` — Complete language spec for AI code generation
 
 ## Building the Compiler

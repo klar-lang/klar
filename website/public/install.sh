@@ -1,6 +1,6 @@
 #!/bin/sh
-# Klar installer — https://kler.run
-# Usage: curl -fsSL kler.run/install.sh | sh
+# Klar installer — https://klar.run
+# Usage: curl -fsSL klar.run/install.sh | sh
 
 set -e
 
