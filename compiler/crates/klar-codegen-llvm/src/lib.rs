@@ -1,3 +1,4 @@
+use inkwell::basic_block::BasicBlock;
 use inkwell::builder::Builder;
 use inkwell::context::Context;
 use inkwell::module::Module;
@@ -156,6 +157,8 @@ struct LlvmGen<'ctx> {
     enum_types: HashMap<String, EnumInfo<'ctx>>,
     /// Function declarations.
     functions: HashMap<String, FunctionValue<'ctx>>,
+    /// Stack of loop exit blocks for `break` statements.
+    loop_exit_stack: Vec<BasicBlock<'ctx>>,
 }
 
 #[derive(Clone)]
@@ -179,6 +182,7 @@ impl<'ctx> LlvmGen<'ctx> {
             struct_types: HashMap::new(),
             enum_types: HashMap::new(),
             functions: HashMap::new(),
+            loop_exit_stack: Vec::new(),
         }
     }
 
@@ -511,7 +515,10 @@ impl<'ctx> LlvmGen<'ctx> {
                 Ok(None)
             }
             Stmt::Break(_) => {
-                // Will be handled by loop structure
+                if let Some(&exit_bb) = self.loop_exit_stack.last() {
+                    self.builder.build_unconditional_branch(exit_bb)
+                        .map_err(|e| CodegenError::Llvm(e.to_string()))?;
+                }
                 Ok(None)
             }
             Stmt::Assign(target, value, _) => {
@@ -611,9 +618,10 @@ impl<'ctx> LlvmGen<'ctx> {
             .map_err(|e| CodegenError::Llvm(e.to_string()))?;
         self.builder.position_at_end(loop_bb);
 
-        // Emit block — breaks need to jump to after_bb
-        // For now, emit the block and add unconditional branch back
+        // Push break target so `break` statements can branch to after_bb
+        self.loop_exit_stack.push(after_bb);
         self.emit_block(block)?;
+        self.loop_exit_stack.pop();
 
         if self.needs_terminator() {
             self.builder.build_unconditional_branch(loop_bb)
