@@ -13,8 +13,8 @@ GREEN='\033[0;32m'
 BOLD='\033[1m'
 RESET='\033[0m'
 
-info() { printf "${GREEN}>${RESET} %s\n" "$1"; }
-error() { printf "${RED}error${RESET}: %s\n" "$1" >&2; exit 1; }
+info() { printf "%b>%b %s\n" "$GREEN" "$RESET" "$1"; }
+error() { printf "%berror%b: %s\n" "$RED" "$RESET" "$1" >&2; exit 1; }
 
 # Detect OS and architecture
 detect_platform() {
@@ -70,12 +70,12 @@ install() {
     sudo mv "${TMPDIR}/klar" "${INSTALL_DIR}/klar"
   fi
 
-  info "${BOLD}klar ${VERSION}${RESET} installed to ${INSTALL_DIR}/klar"
-  info "Run ${BOLD}klar --help${RESET} to get started"
+  printf "%b>%b %bklar %s%b installed to %s/klar\n" "$GREEN" "$RESET" "$BOLD" "$VERSION" "$RESET" "$INSTALL_DIR"
+  printf "%b>%b Run %bklar --help%b to get started\n" "$GREEN" "$RESET" "$BOLD" "$RESET"
 }
 
 main() {
-  printf "\n  ${BOLD}Klar Installer${RESET}\n"
+  printf "\n  %bKlar Installer%b\n" "$BOLD" "$RESET"
   printf "  The AI-first programming language\n\n"
 
   detect_platform
