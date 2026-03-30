@@ -90,10 +90,21 @@ jobs:
         working-directory: .
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
-          prerelease: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') }}
-          files: |
-            artifacts/klar-linux-x86_64/klar-linux-x86_64
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          PRERELEASE=""
+          if echo "$TAG" | grep -qE "alpha|beta|rc"; then
+            PRERELEASE="--prerelease"
+          fi
+          # Delete existing release if any
+          gh release delete "$TAG" --yes 2>/dev/null || true
+          # Create release with binaries
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --generate-notes \
+            $PRERELEASE \
+            artifacts/klar-linux-x86_64/klar-linux-x86_64 \
             artifacts/klar-macos-arm64/klar-macos-arm64
+        working-directory: .
