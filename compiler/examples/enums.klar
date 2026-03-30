@@ -1,0 +1,42 @@
+// Structs and computed values
+// Demonstrates: structs, field access, functions on structs
+
+struct Rectangle {
+    width: Int
+    height: Int
+}
+
+fn area(r: Rectangle) -> Int {
+    r.width * r.height
+}
+
+fn perimeter(r: Rectangle) -> Int {
+    2 * (r.width + r.height)
+}
+
+fn is_square(r: Rectangle) -> Bool {
+    r.width == r.height
+}
+
+fn main() {
+    let r1 = Rectangle { width: 10, height: 5 }
+    println("Rectangle: {r1.width}x{r1.height}")
+    println("  Area: {area(r1)}")
+    println("  Perimeter: {perimeter(r1)}")
+    println("  Is square: {is_square(r1)}")
+
+    let r2 = Rectangle { width: 7, height: 7 }
+    println("Rectangle: {r2.width}x{r2.height}")
+    println("  Area: {area(r2)}")
+    println("  Is square: {is_square(r2)}")
+}
+
+test area {
+    assert area(Rectangle { width: 3, height: 4 }) == 12
+    assert area(Rectangle { width: 5, height: 5 }) == 25
+}
+
+test is_square {
+    assert is_square(Rectangle { width: 4, height: 4 }) == true
+    assert is_square(Rectangle { width: 3, height: 4 }) == false
+}

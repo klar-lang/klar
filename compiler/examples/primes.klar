@@ -1,0 +1,42 @@
+// Prime checker — recursive approach
+// Demonstrates: recursion, nested if, functions
+
+fn has_divisor(n: Int, i: Int) -> Bool {
+    if i * i > n { false } else {
+        if n % i == 0 { true } else { has_divisor(n, i + 1) }
+    }
+}
+
+fn is_prime(n: Int) -> Bool {
+    if n < 2 { false } else {
+        if has_divisor(n, 2) { false } else { true }
+    }
+}
+
+fn count_primes_from(n: Int, limit: Int, count: Int) -> Int {
+    if n >= limit { count } else {
+        if is_prime(n) {
+            count_primes_from(n + 1, limit, count + 1)
+        } else {
+            count_primes_from(n + 1, limit, count)
+        }
+    }
+}
+
+fn count_primes(limit: Int) -> Int {
+    count_primes_from(2, limit, 0)
+}
+
+fn main() {
+    println("Primes below 100: {count_primes(100)}")
+    println("Primes below 1000: {count_primes(1000)}")
+}
+
+test primes {
+    assert is_prime(2) == true
+    assert is_prime(3) == true
+    assert is_prime(4) == false
+    assert is_prime(17) == true
+    assert count_primes(10) == 4
+    assert count_primes(100) == 25
+}

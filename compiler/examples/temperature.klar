@@ -1,0 +1,29 @@
+// Temperature converter
+// Demonstrates: functions, arithmetic, string interpolation
+
+fn celsius_to_fahrenheit(c: Float) -> Float {
+    c * 9.0 / 5.0 + 32.0
+}
+
+fn fahrenheit_to_celsius(f: Float) -> Float {
+    (f - 32.0) * 5.0 / 9.0
+}
+
+fn celsius_to_kelvin(c: Float) -> Float {
+    c + 273.15
+}
+
+fn main() {
+    println("Temperature Conversions:")
+    println("  0°C = {celsius_to_fahrenheit(0.0)}°F")
+    println("  100°C = {celsius_to_fahrenheit(100.0)}°F")
+    println("  98.6°F = {fahrenheit_to_celsius(98.6)}°C")
+    println("  0°C = {celsius_to_kelvin(0.0)}K")
+    println("  -273.15°C = {celsius_to_kelvin(-273.15)}K")
+}
+
+test conversions {
+    assert celsius_to_fahrenheit(0.0) == 32.0
+    assert celsius_to_fahrenheit(100.0) == 212.0
+    assert celsius_to_kelvin(0.0) == 273.15
+}

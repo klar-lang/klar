@@ -1,0 +1,31 @@
+// Collatz conjecture — recursive
+// Demonstrates: recursion, if/else, accumulator pattern
+
+fn collatz_steps(val: Int, steps: Int) -> Int {
+    if val <= 1 { steps } else {
+        if val % 2 == 0 {
+            collatz_steps(val / 2, steps + 1)
+        } else {
+            collatz_steps(val * 3 + 1, steps + 1)
+        }
+    }
+}
+
+fn collatz(n: Int) -> Int {
+    collatz_steps(n, 0)
+}
+
+fn main() {
+    println("Collatz steps:")
+    println("  collatz(1) = {collatz(1)}")
+    println("  collatz(6) = {collatz(6)}")
+    println("  collatz(27) = {collatz(27)}")
+    println("  collatz(871) = {collatz(871)}")
+}
+
+test collatz {
+    assert collatz(1) == 0
+    assert collatz(2) == 1
+    assert collatz(6) == 8
+    assert collatz(27) == 111
+}
