@@ -1,0 +1,116 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+env:
+  CARGO_TERM_COLOR: always
+
+defaults:
+  run:
+    working-directory: compiler
+
+jobs:
+  build:
+    name: Build ${{ matrix.artifact }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            artifact: klar-linux-x86_64
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            artifact: klar-linux-arm64
+            cross: true
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            artifact: klar-macos-arm64
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            artifact: klar-macos-x86_64
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install LLVM 18 (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+          sudo add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main"
+          sudo apt-get update
+          sudo apt-get install -y llvm-18-dev libpolly-18-dev zlib1g-dev libzstd-dev
+        working-directory: .
+
+      - name: Install LLVM 18 (macOS)
+        if: runner.os == 'macOS'
+        run: brew install llvm@18 zstd
+        working-directory: .
+
+      - name: Install cross-compilation tools
+        if: matrix.cross
+        run: |
+          sudo apt-get install -y gcc-aarch64-linux-gnu
+          mkdir -p ../.cargo
+          echo '[target.aarch64-unknown-linux-gnu]' >> ../.cargo/config.toml
+          echo 'linker = "aarch64-linux-gnu-gcc"' >> ../.cargo/config.toml
+        working-directory: .
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: compiler
+
+      - name: Build
+        run: cargo build --release --target ${{ matrix.target }} -p klar-compiler
+        env:
+          RUSTFLAGS: "-C strip=symbols"
+          LLVM_SYS_180_PREFIX: ${{ runner.os == 'macOS' && '/opt/homebrew/opt/llvm@18' || '/usr/lib/llvm-18' }}
+          LIBRARY_PATH: ${{ runner.os == 'macOS' && '/opt/homebrew/lib' || '' }}
+
+      - name: Package binary
+        run: |
+          cp target/${{ matrix.target }}/release/klar ../${{ matrix.artifact }}
+          chmod +x ../${{ matrix.artifact }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: ${{ matrix.artifact }}
+
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: List artifacts
+        run: find artifacts -type f | head -20
+        working-directory: .
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          prerelease: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') }}
+          files: |
+            artifacts/klar-linux-x86_64/klar-linux-x86_64
+            artifacts/klar-linux-arm64/klar-linux-arm64
+            artifacts/klar-macos-arm64/klar-macos-arm64
+            artifacts/klar-macos-x86_64/klar-macos-x86_64
