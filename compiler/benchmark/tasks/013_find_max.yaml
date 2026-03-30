@@ -1,0 +1,21 @@
+id: "013"
+title: "Find Max"
+category: "data_structures"
+difficulty: "easy"
+prompt: |
+  Write a Klar function called `find_max` that takes an `items: List[Int]`
+  parameter and returns the maximum element. Assume the list is non-empty.
+solution: |
+  fn find_max(items: List[Int]) -> Int {
+      items |> std.list.fold(items |> std.list.first(), |acc, x| {
+          if x > acc { x } else { acc }
+      })
+  }
+test: |
+  test find_max {
+      assert_eq(find_max([1, 2, 3]), 3)
+      assert_eq(find_max([3, 2, 1]), 3)
+      assert_eq(find_max([5]), 5)
+      assert_eq(find_max([-1, -2, -3]), -1)
+      assert_eq(find_max([1, 5, 3, 2, 4]), 5)
+  }

@@ -1,0 +1,31 @@
+id: "026"
+title: "Simple Calculator"
+category: "full_programs"
+difficulty: "medium"
+prompt: |
+  Write a Klar function called `calc` that takes `a: Int`, `op: String`,
+  and `b: Int` parameters. Support "+", "-", "*", and "/" operations.
+  For division, perform integer division. If an unknown operator is given,
+  return 0.
+solution: |
+  fn calc(a: Int, op: String, b: Int) -> Int {
+      if op == "+" {
+          a + b
+      } else if op == "-" {
+          a - b
+      } else if op == "*" {
+          a * b
+      } else if op == "/" {
+          a / b
+      } else {
+          0
+      }
+  }
+test: |
+  test calc {
+      assert_eq(calc(2, "+", 3), 5)
+      assert_eq(calc(10, "-", 4), 6)
+      assert_eq(calc(3, "*", 7), 21)
+      assert_eq(calc(10, "/", 3), 3)
+      assert_eq(calc(1, "^", 2), 0)
+  }

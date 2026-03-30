@@ -1,0 +1,54 @@
+use std.http.{Router, Request, Response, serve}
+use std.json
+use std.crypto
+use std.time
+
+@schema
+struct ShortenRequest {
+  url: String @min_len(1)
+}
+
+@schema
+struct ShortUrl {
+  code: String
+  url: String
+  created_at: String
+}
+
+// In-memory store (will be replaced with database in production)
+let mut urls = {}
+
+fn shorten(req: Request) -> Response {
+  let body = req.json()
+  let url = body.url
+  let code = string.slice(crypto.uuid(), 0, 8)
+  let short = ShortUrl {
+    code: code,
+    url: url,
+    created_at: time.now(),
+  }
+  Response.json(short)
+}
+
+fn redirect(req: Request) -> Response {
+  let code = req.param("code")
+  Response.text("redirect placeholder")
+}
+
+fn health(req: Request) -> Response {
+  Response.text("ok")
+}
+
+fn main() {
+  let router = Router.new()
+  router.post("/shorten", shorten)
+  router.get("/:code", redirect)
+  router.get("/health", health)
+  serve(router, 4568)
+}
+
+test shorten_creates_code {
+  let req = Request.post("/shorten", ShortenRequest { url: "https://example.com" })
+  let res = shorten(req)
+  assert res.status == 200
+}

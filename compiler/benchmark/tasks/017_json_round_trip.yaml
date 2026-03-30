@@ -1,0 +1,18 @@
+id: "017"
+title: "JSON Round Trip"
+category: "json"
+difficulty: "medium"
+prompt: |
+  Write a Klar function called `round_trip` that takes a `s: String`
+  parameter containing valid JSON, decodes it, then encodes it back
+  to a JSON string and returns the result.
+solution: |
+  fn round_trip(s: String) -> String {
+      s |> std.json.decode() |> std.json.encode()
+  }
+test: |
+  test round_trip {
+      assert_eq(round_trip("{\"name\":\"Alice\"}"), "{\"name\":\"Alice\"}")
+      assert_eq(round_trip("[1,2,3]"), "[1,2,3]")
+      assert_eq(round_trip("42"), "42")
+  }

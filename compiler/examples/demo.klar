@@ -1,0 +1,48 @@
+// Klar Demo — first runnable program!
+
+struct Point {
+    x: Int
+    y: Int
+}
+
+fn add(a: Int, b: Int) -> Int {
+    a + b
+}
+
+fn greet(name: String) -> String {
+    "Hello, {name}!"
+}
+
+fn main() {
+    println("=== Klar v0.1.0-alpha ===")
+    println("")
+
+    let x = add(20, 22)
+    println("20 + 22 = {x}")
+
+    let msg = greet("World")
+    println(msg)
+
+    let items = [1, 2, 3, 4, 5]
+    for item in items {
+        println("  item: {item}")
+    }
+
+    let p = Point { x: 10, y: 20 }
+    println("Point: ({p.x}, {p.y})")
+
+    if x == 42 {
+        println("The answer is correct!")
+    } else {
+        println("Something went wrong")
+    }
+
+    println("")
+    println("Done.")
+}
+
+test add {
+    assert add(2, 3) == 5
+    assert add(-1, 1) == 0
+    assert add(0, 0) == 0
+}

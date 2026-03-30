@@ -1,0 +1,17 @@
+use std.http.{Router, Request, Response, serve}
+
+fn hello(req: Request) -> Response {
+  let name = req.param("name")
+  Response.text(name)
+}
+
+fn health(req: Request) -> Response {
+  Response.text("ok")
+}
+
+fn main() {
+  let router = Router.new()
+  router.get("/hello/:name", hello)
+  router.get("/health", health)
+  serve(router, 4567)
+}

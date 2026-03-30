@@ -1,0 +1,17 @@
+id: "001"
+title: "Hello World"
+category: "basics"
+difficulty: "easy"
+prompt: |
+  Write a Klar function called `hello` that takes a `name: String` parameter
+  and returns the string "Hello, {name}!".
+solution: |
+  fn hello(name: String) -> String {
+      "Hello, {name}!"
+  }
+test: |
+  test hello {
+      assert_eq(hello("World"), "Hello, World!")
+      assert_eq(hello("Klar"), "Hello, Klar!")
+      assert_eq(hello(""), "Hello, !")
+  }

@@ -1,0 +1,15 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Klar badge logo">
+  <circle cx="60" cy="55" r="42" fill="#2ECC71" />
+  <path d="M32,35 Q22,12 16,32 Q25,25 33,37Z" fill="#2ECC71" />
+  <path d="M88,35 Q98,12 104,32 Q95,25 87,37Z" fill="#2ECC71" />
+  <ellipse cx="44" cy="50" rx="17" ry="18" fill="#fff" stroke="#1B7A3D" stroke-width="1" />
+  <ellipse cx="76" cy="50" rx="17" ry="18" fill="#fff" stroke="#1B7A3D" stroke-width="1" />
+  <circle cx="47" cy="48" r="8" fill="#1A1A2E" />
+  <circle cx="79" cy="48" r="8" fill="#1A1A2E" />
+  <circle cx="50" cy="44" r="3" fill="#fff" />
+  <circle cx="82" cy="44" r="3" fill="#fff" />
+  <path d="M54,72 L60,80 L66,72" fill="#E67E22" stroke-linejoin="round" />
+  <path d="M50,90 Q60,97 70,90" fill="none" stroke="#1B7A3D" stroke-width="1.5" stroke-linecap="round" />
+  <rect x="18" y="100" width="84" height="18" rx="6" fill="#27AE60" />
+  <text x="60" y="114" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#fff" letter-spacing="2">KLAR</text>
+</svg>

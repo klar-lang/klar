@@ -1,0 +1,23 @@
+id: "022"
+title: "Retry Pattern"
+category: "error_handling"
+difficulty: "medium"
+prompt: |
+  Write a Klar function called `with_retry` that takes an `attempts: Int`
+  parameter. It simulates a retry pattern: if attempts is greater than 0,
+  return "success after {attempts} attempts", otherwise return "no attempts made".
+solution: |
+  fn with_retry(attempts: Int) -> String {
+      if attempts > 0 {
+          "success after {attempts} attempts"
+      } else {
+          "no attempts made"
+      }
+  }
+test: |
+  test with_retry {
+      assert_eq(with_retry(3), "success after 3 attempts")
+      assert_eq(with_retry(1), "success after 1 attempts")
+      assert_eq(with_retry(0), "no attempts made")
+      assert_eq(with_retry(-1), "no attempts made")
+  }

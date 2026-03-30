@@ -1,0 +1,13 @@
+[package]
+name = "klar-codegen-js"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+klar-lexer = { path = "../klar-lexer" }
+klar-ast = { path = "../klar-ast" }
+
+[dev-dependencies]
+klar-parser = { path = "../klar-parser" }

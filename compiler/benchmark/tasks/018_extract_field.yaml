@@ -1,0 +1,19 @@
+id: "018"
+title: "Extract JSON Field"
+category: "json"
+difficulty: "medium"
+prompt: |
+  Write a Klar function called `get_name` that takes a `json_str: String`
+  parameter containing a JSON object with a "name" field, and returns
+  the value of the "name" field as a String.
+solution: |
+  fn get_name(json_str: String) -> String {
+      let obj = json_str |> std.json.decode()
+      obj |> std.json.get("name") |> std.json.as_string()
+  }
+test: |
+  test get_name {
+      assert_eq(get_name("{\"name\":\"Alice\",\"age\":30}"), "Alice")
+      assert_eq(get_name("{\"name\":\"Bob\"}"), "Bob")
+      assert_eq(get_name("{\"name\":\"\"}"), "")
+  }

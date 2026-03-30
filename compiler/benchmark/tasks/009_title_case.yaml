@@ -1,0 +1,30 @@
+id: "009"
+title: "Title Case"
+category: "string_manipulation"
+difficulty: "medium"
+prompt: |
+  Write a Klar function called `title_case` that takes a `s: String`
+  parameter and returns the string with the first letter of each word
+  capitalized and the rest lowercased.
+solution: |
+  fn title_case(s: String) -> String {
+      s
+      |> std.string.split(" ")
+      |> std.list.map(|word| {
+          if word == "" {
+              ""
+          } else {
+              let first = word |> std.string.slice(0, 1) |> std.string.to_upper()
+              let rest = word |> std.string.slice(1, std.string.length(word)) |> std.string.to_lower()
+              "{first}{rest}"
+          }
+      })
+      |> std.string.join(" ")
+  }
+test: |
+  test title_case {
+      assert_eq(title_case("hello world"), "Hello World")
+      assert_eq(title_case("HELLO WORLD"), "Hello World")
+      assert_eq(title_case("foo"), "Foo")
+      assert_eq(title_case(""), "")
+  }

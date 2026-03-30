@@ -1,0 +1,21 @@
+id: "008"
+title: "Count Vowels"
+category: "string_manipulation"
+difficulty: "easy"
+prompt: |
+  Write a Klar function called `count_vowels` that takes a `s: String`
+  parameter and returns the number of vowels (a, e, i, o, u, case-insensitive)
+  in the string.
+solution: |
+  fn count_vowels(s: String) -> Int {
+      let vowels = "aeiouAEIOU"
+      s |> std.string.chars() |> std.list.filter(|c| vowels |> std.string.contains(c)) |> std.list.length()
+  }
+test: |
+  test count_vowels {
+      assert_eq(count_vowels("hello"), 2)
+      assert_eq(count_vowels("HELLO"), 2)
+      assert_eq(count_vowels("xyz"), 0)
+      assert_eq(count_vowels("aeiou"), 5)
+      assert_eq(count_vowels(""), 0)
+  }

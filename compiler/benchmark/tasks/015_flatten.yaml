@@ -1,0 +1,19 @@
+id: "015"
+title: "Flatten Nested"
+category: "data_structures"
+difficulty: "medium"
+prompt: |
+  Write a Klar function called `flatten` that takes an `items: List[List[Int]]`
+  parameter and returns a single flat list containing all elements from
+  the nested lists in order.
+solution: |
+  fn flatten(items: List[List[Int]]) -> List[Int] {
+      items |> std.list.fold([], |acc, sublist| acc |> std.list.concat(sublist))
+  }
+test: |
+  test flatten {
+      assert_eq(flatten([[1, 2], [3, 4], [5]]), [1, 2, 3, 4, 5])
+      assert_eq(flatten([[], [1], []]), [1])
+      assert_eq(flatten([]), [])
+      assert_eq(flatten([[1, 2, 3]]), [1, 2, 3])
+  }

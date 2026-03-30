@@ -1,0 +1,22 @@
+id: "005"
+title: "Factorial"
+category: "basics"
+difficulty: "easy"
+prompt: |
+  Write a Klar function called `factorial` that takes an `n: Int` parameter
+  and returns the factorial of n. factorial(0) = 1, factorial(n) = n * factorial(n-1).
+solution: |
+  fn factorial(n: Int) -> Int {
+      if n <= 0 {
+          1
+      } else {
+          n * factorial(n - 1)
+      }
+  }
+test: |
+  test factorial {
+      assert_eq(factorial(0), 1)
+      assert_eq(factorial(1), 1)
+      assert_eq(factorial(5), 120)
+      assert_eq(factorial(10), 3628800)
+  }

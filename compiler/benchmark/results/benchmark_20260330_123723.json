@@ -1,0 +1,145 @@
+{
+  "timestamp": "20260330_123723",
+  "total": 15,
+  "passed": 3,
+  "failed": 12,
+  "correctness": 20.0,
+  "duration_ms": 221.24695777893066,
+  "results": [
+    {
+      "task_id": "001",
+      "title": "Hello World",
+      "category": "basics",
+      "passed": true,
+      "compile_ok": true,
+      "error": null,
+      "duration_ms": 19.297122955322266
+    },
+    {
+      "task_id": "002",
+      "title": "FizzBuzz",
+      "category": "basics",
+      "passed": true,
+      "compile_ok": true,
+      "error": null,
+      "duration_ms": 18.172264099121094
+    },
+    {
+      "task_id": "003",
+      "title": "Fibonacci",
+      "category": "basics",
+      "passed": false,
+      "compile_ok": false,
+      "error": "\u001b[31m\u2717\u001b[0m 1 type errors in /tmp/klar_bench_003.klar:\n  \u2192 170:175 undefined: 'while'",
+      "duration_ms": 2.3331642150878906
+    },
+    {
+      "task_id": "004",
+      "title": "Is Palindrome",
+      "category": "basics",
+      "passed": false,
+      "compile_ok": true,
+      "error": "/private/var/folders/dp/1t5x0x1546n9z5l1r11nfvsm0000gn/T/klar_test.js:174\n  return std.string.reverse()((s === s));\n                    ^\n\nTypeError: std.string.reverse is not a function\n    at is_pal",
+      "duration_ms": 19.157886505126953
+    },
+    {
+      "task_id": "005",
+      "title": "Factorial",
+      "category": "basics",
+      "passed": true,
+      "compile_ok": true,
+      "error": null,
+      "duration_ms": 18.620014190673828
+    },
+    {
+      "task_id": "006",
+      "title": "Max of Three",
+      "category": "basics",
+      "passed": false,
+      "compile_ok": false,
+      "error": "\u001b[31m\u2717\u001b[0m 3 parse errors in /tmp/klar_bench_006.klar:\n  \u2192 55:56 expected LBrace\n  \u2192 56:57 expected expression\n  \u2192 88:90 expected LBrace",
+      "duration_ms": 2.3949146270751953
+    },
+    {
+      "task_id": "007",
+      "title": "Reverse String",
+      "category": "string_manipulation",
+      "passed": false,
+      "compile_ok": true,
+      "error": "/private/var/folders/dp/1t5x0x1546n9z5l1r11nfvsm0000gn/T/klar_test.js:174\n  return std.string.reverse()(s);\n                    ^\n\nTypeError: std.string.reverse is not a function\n    at reverse (/priv",
+      "duration_ms": 18.790006637573242
+    },
+    {
+      "task_id": "008",
+      "title": "Count Vowels",
+      "category": "string_manipulation",
+      "passed": false,
+      "compile_ok": true,
+      "error": "/private/var/folders/dp/1t5x0x1546n9z5l1r11nfvsm0000gn/T/klar_test.js:46\n  length: (arr) => arr.length,\n                       ^\n\nTypeError: Cannot read properties of undefined (reading 'length')\n    ",
+      "duration_ms": 19.815921783447266
+    },
+    {
+      "task_id": "009",
+      "title": "Title Case",
+      "category": "string_manipulation",
+      "passed": false,
+      "compile_ok": true,
+      "error": "/private/var/folders/dp/1t5x0x1546n9z5l1r11nfvsm0000gn/T/klar_test.js:14\n  join: (arr, sep) => arr.join(sep),\n                          ^\n\nTypeError: arr.join is not a function\n    at Object.join (/pr",
+      "duration_ms": 19.538164138793945
+    },
+    {
+      "task_id": "010",
+      "title": "Truncate",
+      "category": "string_manipulation",
+      "passed": false,
+      "compile_ok": true,
+      "error": "/private/var/folders/dp/1t5x0x1546n9z5l1r11nfvsm0000gn/T/klar_test.js:27\n  slice: (s, start, end) => s.slice(start, end),\n                              ^\n\nTypeError: s.slice is not a function\n    at O",
+      "duration_ms": 19.659996032714844
+    },
+    {
+      "task_id": "011",
+      "title": "Remove Duplicate Characters",
+      "category": "string_manipulation",
+      "passed": false,
+      "compile_ok": false,
+      "error": "\u001b[31m\u2717\u001b[0m 1 parse errors in /tmp/klar_bench_011.klar:\n  \u2192 158:159 expected expression",
+      "duration_ms": 2.4890899658203125
+    },
+    {
+      "task_id": "012",
+      "title": "Sum List",
+      "category": "data_structures",
+      "passed": false,
+      "compile_ok": true,
+      "error": "/private/var/folders/dp/1t5x0x1546n9z5l1r11nfvsm0000gn/T/klar_test.js:174\n  return std.list.fold(0, (acc, x) => (acc + x))(items);\n                  ^\n\nTypeError: std.list.fold is not a function\n    a",
+      "duration_ms": 19.30379867553711
+    },
+    {
+      "task_id": "013",
+      "title": "Find Max",
+      "category": "data_structures",
+      "passed": false,
+      "compile_ok": true,
+      "error": "/private/var/folders/dp/1t5x0x1546n9z5l1r11nfvsm0000gn/T/klar_test.js:174\n  return std.list.fold(std.list.first()(items), (acc, x) => (() => { return ((x > acc) ? (() => { return x; })() : (() => { re",
+      "duration_ms": 19.469022750854492
+    },
+    {
+      "task_id": "014",
+      "title": "Remove Duplicates",
+      "category": "data_structures",
+      "passed": false,
+      "compile_ok": false,
+      "error": "\u001b[31m\u2717\u001b[0m 1 parse errors in /tmp/klar_bench_014.klar:\n  \u2192 145:146 expected expression",
+      "duration_ms": 2.413034439086914
+    },
+    {
+      "task_id": "015",
+      "title": "Flatten Nested",
+      "category": "data_structures",
+      "passed": false,
+      "compile_ok": true,
+      "error": "/private/var/folders/dp/1t5x0x1546n9z5l1r11nfvsm0000gn/T/klar_test.js:174\n  return std.list.fold([], (acc, sublist) => std.list.concat(sublist)(acc))(items);\n                  ^\n\nTypeError: std.list.f",
+      "duration_ms": 19.339799880981445
+    }
+  ]
+}

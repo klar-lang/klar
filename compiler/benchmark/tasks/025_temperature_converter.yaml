@@ -1,0 +1,24 @@
+id: "025"
+title: "Temperature Converter"
+category: "full_programs"
+difficulty: "easy"
+prompt: |
+  Write two Klar functions: `celsius_to_fahrenheit` that takes a `c: Float`
+  parameter and returns the Fahrenheit equivalent, and `fahrenheit_to_celsius`
+  that takes an `f: Float` parameter and returns the Celsius equivalent.
+  Formulas: F = C * 9/5 + 32, C = (F - 32) * 5/9.
+solution: |
+  fn celsius_to_fahrenheit(c: Float) -> Float {
+      c * 9.0 / 5.0 + 32.0
+  }
+
+  fn fahrenheit_to_celsius(f: Float) -> Float {
+      (f - 32.0) * 5.0 / 9.0
+  }
+test: |
+  test temperature_converter {
+      assert_eq(celsius_to_fahrenheit(0.0), 32.0)
+      assert_eq(celsius_to_fahrenheit(100.0), 212.0)
+      assert_eq(fahrenheit_to_celsius(32.0), 0.0)
+      assert_eq(fahrenheit_to_celsius(212.0), 100.0)
+  }

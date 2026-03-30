@@ -1,0 +1,22 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Klar mascot">
+  <circle cx="100" cy="90" r="75" fill="#27AE60" />
+  <ellipse cx="100" cy="100" rx="70" ry="72" fill="#2ECC71" />
+  <path d="M55,60 Q40,25 30,55 Q42,45 55,62Z" fill="#2ECC71" />
+  <path d="M145,60 Q160,25 170,55 Q158,45 145,62Z" fill="#2ECC71" />
+  <path d="M55,60 Q38,22 25,50" fill="none" stroke="#27AE60" stroke-width="3" />
+  <path d="M145,60 Q162,22 175,50" fill="none" stroke="#27AE60" stroke-width="3" />
+  <ellipse cx="75" cy="88" rx="28" ry="30" fill="#fff" stroke="#1B7A3D" stroke-width="1.5" />
+  <ellipse cx="125" cy="88" rx="28" ry="30" fill="#fff" stroke="#1B7A3D" stroke-width="1.5" />
+  <circle cx="80" cy="85" r="13" fill="#1A1A2E" />
+  <circle cx="130" cy="85" r="13" fill="#1A1A2E" />
+  <circle cx="85" cy="80" r="5" fill="#fff" />
+  <circle cx="135" cy="80" r="5" fill="#fff" />
+  <circle cx="78" cy="90" r="2.5" fill="#fff" opacity="0.5" />
+  <circle cx="128" cy="90" r="2.5" fill="#fff" opacity="0.5" />
+  <path d="M92,118 L100,130 L108,118" fill="#E67E22" stroke="#D35400" stroke-width="1.2" stroke-linejoin="round" />
+  <path d="M86,145 Q100,154 114,145" fill="none" stroke="#1B7A3D" stroke-width="2" stroke-linecap="round" />
+  <path d="M50,120 Q35,135 30,130 Q38,138 32,148 Q45,140 48,152 Q50,138 58,130Z" fill="#2ECC71" />
+  <path d="M150,120 Q165,135 170,130 Q162,138 168,148 Q155,140 152,152 Q150,138 142,130Z" fill="#2ECC71" />
+  <path d="M82,170 L80,188 Q78,195 86,195 L92,195 Q96,195 95,188 L93,170Z" fill="#E67E22" />
+  <path d="M107,170 L105,188 Q103,195 111,195 L117,195 Q121,195 120,188 L118,170Z" fill="#E67E22" />
+</svg>

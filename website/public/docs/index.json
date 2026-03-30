@@ -1,0 +1,92 @@
+{
+  "name": "Klar Documentation",
+  "version": "0.1.0",
+  "description": "Official documentation for the Klar programming language. Machine-readable and human-browsable.",
+  "base_url": "https://kler.run/docs",
+  "ai_instructions": "These documents are optimized for AI consumption. Each file includes YAML frontmatter with metadata. Use language-spec.md as a system prompt for Klar code generation.",
+  "pages": [
+    {
+      "slug": "language-spec",
+      "title": "Language Specification",
+      "category": "reference",
+      "path": "/docs/language-spec.md",
+      "description": "Complete syntax, type system, and standard library reference. Designed as an AI system prompt."
+    },
+    {
+      "slug": "getting-started",
+      "title": "Getting Started",
+      "category": "guide",
+      "path": "/docs/getting-started.md",
+      "description": "Installation, project setup, hello world, and first API."
+    },
+    {
+      "slug": "license",
+      "title": "License",
+      "category": "legal",
+      "path": "/docs/license.md",
+      "description": "Klar is licensed under Apache License 2.0, including terms, obligations, and contributor notes."
+    },
+    {
+      "slug": "compiler-overview",
+      "title": "Compiler Overview",
+      "category": "concepts",
+      "path": "/docs/compiler-overview.md",
+      "description": "How the Klar compiler workspace is structured and how source flows from lexing to codegen."
+    },
+    {
+      "slug": "cli-reference",
+      "title": "CLI Reference",
+      "category": "reference",
+      "path": "/docs/cli-reference.md",
+      "description": "Practical command reference for klar: build, run, check, test, lint, bench, and package commands."
+    },
+    {
+      "slug": "compiler-contributing",
+      "title": "Compiler Contributing",
+      "category": "guide",
+      "path": "/docs/compiler-contributing.md",
+      "description": "Practical setup and workflow for contributing to compiler crates."
+    },
+    {
+      "slug": "backends",
+      "title": "Backends",
+      "category": "reference",
+      "path": "/docs/backends.md",
+      "description": "JS, LLVM native/IR, and WASM backend status and usage."
+    },
+    {
+      "slug": "package-manager",
+      "title": "Package Manager",
+      "category": "guide",
+      "path": "/docs/package-manager.md",
+      "description": "klar.toml, klar.lock, and init/add/remove command behavior."
+    },
+    {
+      "slug": "diagnostics",
+      "title": "Diagnostics",
+      "category": "reference",
+      "path": "/docs/diagnostics.md",
+      "description": "Human and JSON diagnostic output format for klar check."
+    },
+    {
+      "slug": "lsp",
+      "title": "Language Server (LSP)",
+      "category": "guide",
+      "path": "/docs/lsp.md",
+      "description": "Build, run, and integrate klar-lsp in your editor."
+    },
+    {
+      "slug": "formatting",
+      "title": "Formatting",
+      "category": "guide",
+      "path": "/docs/formatting.md",
+      "description": "Current formatter behavior, caveats, and CI usage guidance."
+    }
+  ],
+  "categories": [
+    { "slug": "guide", "title": "Guides", "description": "Step-by-step tutorials" },
+    { "slug": "reference", "title": "Reference", "description": "API and syntax reference" },
+    { "slug": "concepts", "title": "Concepts", "description": "Design philosophy and architecture" },
+    { "slug": "legal", "title": "Legal", "description": "Licensing and usage terms" }
+  ]
+}

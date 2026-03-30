@@ -1,0 +1,28 @@
+id: "023"
+title: "Word Frequency Counter"
+category: "full_programs"
+difficulty: "medium"
+prompt: |
+  Write a Klar function called `word_freq` that takes a `text: String`
+  parameter and returns a Map[String, Int] where each key is a word
+  from the text and each value is the number of times that word appears.
+  Split on spaces. Words are case-sensitive.
+solution: |
+  fn word_freq(text: String) -> Map[String, Int] {
+      let words = text |> std.string.split(" ") |> std.list.filter(|w| w != "")
+      words |> std.list.fold(Map.new(), |acc, word| {
+          let count = match acc |> Map.get(word) {
+              Ok(n) => n + 1
+              Err(_) => 1
+          }
+          acc |> Map.insert(word, count)
+      })
+  }
+test: |
+  test word_freq {
+      let result = word_freq("the cat sat on the mat")
+      assert_eq(result |> Map.get("the"), Ok(2))
+      assert_eq(result |> Map.get("cat"), Ok(1))
+      assert_eq(result |> Map.get("sat"), Ok(1))
+      assert_eq(result |> Map.get("mat"), Ok(1))
+  }

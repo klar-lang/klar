@@ -1,0 +1,28 @@
+id: "011"
+title: "Remove Duplicate Characters"
+category: "string_manipulation"
+difficulty: "medium"
+prompt: |
+  Write a Klar function called `remove_dup_chars` that takes a `s: String`
+  parameter and returns a new string with duplicate characters removed,
+  keeping only the first occurrence of each character.
+solution: |
+  fn remove_dup_chars(s: String) -> String {
+      let mut seen = Map.new()
+      let mut result = ""
+      s |> std.string.chars() |> std.list.each(|c| {
+          if !(seen |> Map.contains(c)) {
+              seen = seen |> Map.insert(c, true)
+              result = "{result}{c}"
+          }
+      })
+      result
+  }
+test: |
+  test remove_dup_chars {
+      assert_eq(remove_dup_chars("hello"), "helo")
+      assert_eq(remove_dup_chars("aabbcc"), "abc")
+      assert_eq(remove_dup_chars("abcabc"), "abc")
+      assert_eq(remove_dup_chars(""), "")
+      assert_eq(remove_dup_chars("abc"), "abc")
+  }

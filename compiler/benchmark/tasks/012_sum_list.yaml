@@ -1,0 +1,18 @@
+id: "012"
+title: "Sum List"
+category: "data_structures"
+difficulty: "easy"
+prompt: |
+  Write a Klar function called `sum` that takes an `items: List[Int]`
+  parameter and returns the sum of all elements in the list.
+solution: |
+  fn sum(items: List[Int]) -> Int {
+      items |> std.list.fold(0, |acc, x| acc + x)
+  }
+test: |
+  test sum {
+      assert_eq(sum([1, 2, 3, 4, 5]), 15)
+      assert_eq(sum([]), 0)
+      assert_eq(sum([10]), 10)
+      assert_eq(sum([-1, 1]), 0)
+  }

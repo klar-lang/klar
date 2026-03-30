@@ -1,0 +1,31 @@
+id: "024"
+title: "Caesar Cipher"
+category: "full_programs"
+difficulty: "medium"
+prompt: |
+  Write a Klar function called `caesar_encode` that takes a `text: String`
+  and `shift: Int` parameter, and returns the text with each letter shifted
+  by the given amount in the alphabet. Only shift lowercase a-z letters;
+  leave all other characters unchanged. Wrap around from z to a.
+solution: |
+  fn caesar_encode(text: String, shift: Int) -> String {
+      text
+      |> std.string.chars()
+      |> std.list.map(|c| {
+          let code = std.string.char_code(c)
+          if code >= 97 and code <= 122 {
+              let shifted = (code - 97 + shift) % 26
+              std.string.from_char_code(shifted + 97)
+          } else {
+              c
+          }
+      })
+      |> std.string.join("")
+  }
+test: |
+  test caesar_encode {
+      assert_eq(caesar_encode("abc", 1), "bcd")
+      assert_eq(caesar_encode("xyz", 3), "abc")
+      assert_eq(caesar_encode("hello", 0), "hello")
+      assert_eq(caesar_encode("Hello World", 1), "Hfmmp World")
+  }

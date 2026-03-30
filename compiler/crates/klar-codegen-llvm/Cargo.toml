@@ -1,0 +1,15 @@
+[package]
+name = "klar-codegen-llvm"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+klar-lexer = { path = "../klar-lexer" }
+klar-ast = { path = "../klar-ast" }
+inkwell = { version = "0.5", features = ["llvm18-0"] }
+thiserror.workspace = true
+
+[dev-dependencies]
+klar-parser = { path = "../klar-parser" }

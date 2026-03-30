@@ -1,0 +1,19 @@
+[package]
+name = "klar-compiler"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "klar"
+path = "src/main.rs"
+
+[dependencies]
+klar-lexer = { path = "../klar-lexer" }
+klar-ast = { path = "../klar-ast" }
+klar-parser = { path = "../klar-parser" }
+klar-typeck = { path = "../klar-typeck" }
+klar-codegen-js = { path = "../klar-codegen-js" }
+klar-codegen-llvm = { path = "../klar-codegen-llvm" }
+klar-pkg = { path = "../klar-pkg" }

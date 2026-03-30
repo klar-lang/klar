@@ -1,0 +1,22 @@
+id: "016"
+title: "Group by Parity"
+category: "data_structures"
+difficulty: "medium"
+prompt: |
+  Write a Klar function called `group_by_parity` that takes an
+  `items: List[Int]` parameter and returns a Map[String, List[Int]] with
+  keys "even" and "odd" grouping the numbers by their parity.
+solution: |
+  fn group_by_parity(items: List[Int]) -> Map[String, List[Int]] {
+      let evens = items |> std.list.filter(|x| x % 2 == 0)
+      let odds = items |> std.list.filter(|x| x % 2 != 0)
+      Map.new()
+      |> Map.insert("even", evens)
+      |> Map.insert("odd", odds)
+  }
+test: |
+  test group_by_parity {
+      let result = group_by_parity([1, 2, 3, 4, 5, 6])
+      assert_eq(result |> Map.get("even"), [2, 4, 6])
+      assert_eq(result |> Map.get("odd"), [1, 3, 5])
+  }

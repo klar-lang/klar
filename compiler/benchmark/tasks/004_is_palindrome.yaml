@@ -1,0 +1,20 @@
+id: "004"
+title: "Is Palindrome"
+category: "basics"
+difficulty: "easy"
+prompt: |
+  Write a Klar function called `is_palindrome` that takes a `s: String`
+  parameter and returns true if the string reads the same forwards and
+  backwards, false otherwise.
+solution: |
+  fn is_palindrome(s: String) -> Bool {
+      s == s |> std.string.reverse()
+  }
+test: |
+  test is_palindrome {
+      assert_eq(is_palindrome("racecar"), true)
+      assert_eq(is_palindrome("hello"), false)
+      assert_eq(is_palindrome(""), true)
+      assert_eq(is_palindrome("a"), true)
+      assert_eq(is_palindrome("abba"), true)
+  }

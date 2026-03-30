@@ -1,0 +1,22 @@
+id: "021"
+title: "Parse Int or Default"
+category: "error_handling"
+difficulty: "easy"
+prompt: |
+  Write a Klar function called `parse_or_default` that takes a `s: String`
+  and `default: Int` parameter. Attempt to parse the string as an integer.
+  If parsing succeeds, return the parsed value; otherwise return the default.
+solution: |
+  fn parse_or_default(s: String, default: Int) -> Int {
+      match std.string.parse_int(s) {
+          Ok(n) => n
+          Err(_) => default
+      }
+  }
+test: |
+  test parse_or_default {
+      assert_eq(parse_or_default("42", 0), 42)
+      assert_eq(parse_or_default("abc", 0), 0)
+      assert_eq(parse_or_default("", 10), 10)
+      assert_eq(parse_or_default("-5", 0), -5)
+  }

@@ -1,0 +1,25 @@
+id: "010"
+title: "Truncate"
+category: "string_manipulation"
+difficulty: "easy"
+prompt: |
+  Write a Klar function called `truncate` that takes a `s: String` and
+  `max_len: Int` parameter. If the string is longer than max_len, truncate
+  it and append "..." (the total length including "..." should be max_len).
+  Otherwise return the string unchanged.
+solution: |
+  fn truncate(s: String, max_len: Int) -> String {
+      if std.string.length(s) <= max_len {
+          s
+      } else {
+          let trimmed = s |> std.string.slice(0, max_len - 3)
+          "{trimmed}..."
+      }
+  }
+test: |
+  test truncate {
+      assert_eq(truncate("hello", 10), "hello")
+      assert_eq(truncate("hello world", 8), "hello...")
+      assert_eq(truncate("abcdefghij", 7), "abcd...")
+      assert_eq(truncate("hi", 5), "hi")
+  }

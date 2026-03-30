@@ -1,0 +1,20 @@
+id: "019"
+title: "Build JSON"
+category: "json"
+difficulty: "medium"
+prompt: |
+  Write a Klar function called `make_greeting` that takes a `name: String`
+  and `age: Int` parameter, and returns a JSON string representing an object
+  with "greeting" and "age" fields, where greeting is "Hello, {name}!".
+solution: |
+  fn make_greeting(name: String, age: Int) -> String {
+      std.json.object()
+      |> std.json.set("greeting", std.json.string("Hello, {name}!"))
+      |> std.json.set("age", std.json.int(age))
+      |> std.json.encode()
+  }
+test: |
+  test make_greeting {
+      assert_eq(make_greeting("Alice", 30), "{\"age\":30,\"greeting\":\"Hello, Alice!\"}")
+      assert_eq(make_greeting("Bob", 25), "{\"age\":25,\"greeting\":\"Hello, Bob!\"}")
+  }

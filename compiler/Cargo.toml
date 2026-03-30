@@ -1,0 +1,23 @@
+[workspace]
+members = [
+    "crates/klar-lexer",
+    "crates/klar-ast",
+    "crates/klar-parser",
+    "crates/klar-compiler",
+    "crates/klar-typeck",
+    "crates/klar-codegen-js",
+    "crates/klar-codegen-llvm",
+    "crates/klar-runtime",
+    "crates/klar-pkg",
+    "crates/klar-lsp",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+repository = "https://github.com/getklar/klar"
+
+[workspace.dependencies]
+thiserror = "2"

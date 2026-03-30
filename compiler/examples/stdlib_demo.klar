@@ -1,0 +1,69 @@
+// Standard Library Demo
+use std.string
+use std.list
+use std.json
+use std.math
+
+fn main() {
+    println("=== Klar Standard Library Demo ===")
+    println("")
+
+    // std.string
+    let greeting = "  Hello, Klar!  "
+    println("trim: '{string.trim(greeting)}'")
+    println("upper: '{string.to_upper(greeting)}'")
+    println("contains 'Klar': {string.contains(greeting, 'Klar')}")
+    println("split: {json.encode(string.split('a,b,c', ','))}")
+    println("")
+
+    // std.list
+    let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    let evens = list.filter(nums, |x| x % 2 == 0)
+    let doubled = list.map(evens, |x| x * 2)
+    let sum = list.reduce(nums, |a, b| a + b, 0)
+    println("nums: {json.encode(nums)}")
+    println("evens: {json.encode(evens)}")
+    println("doubled: {json.encode(doubled)}")
+    println("sum: {sum}")
+    println("reversed: {json.encode(list.reverse(nums))}")
+    println("unique: {json.encode(list.unique([1, 2, 2, 3, 3, 3]))}")
+    println("")
+
+    // std.json
+    let data = json.encode([1, 2, 3])
+    let parsed = json.decode(data)
+    println("json round-trip: {json.encode(parsed)}")
+    println("")
+
+    // std.math
+    println("pi: {math.pi}")
+    println("sqrt(144): {math.sqrt(144)}")
+    println("abs(-42): {math.abs(-42)}")
+    println("pow(2, 10): {math.pow(2, 10)}")
+    println("clamp(15, 0, 10): {math.clamp(15, 0, 10)}")
+    println("")
+
+    println("Done.")
+}
+
+test string_ops {
+    assert string.contains("hello world", "world")
+    assert string.starts_with("hello", "hel")
+    assert string.ends_with("hello", "llo")
+    assert_eq(string.trim("  hi  "), "hi")
+    assert_eq(string.to_upper("hello"), "HELLO")
+}
+
+test list_ops {
+    let xs = [1, 2, 3]
+    assert_eq(list.length(xs), 3)
+    assert list.includes(xs, 2)
+    assert_eq(list.reduce(xs, |a, b| a + b, 0), 6)
+}
+
+test math_ops {
+    assert_eq(math.abs(-5), 5)
+    assert_eq(math.max(1, 2), 2)
+    assert_eq(math.min(1, 2), 1)
+    assert_eq(math.pow(2, 3), 8)
+}

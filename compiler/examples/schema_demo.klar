@@ -1,0 +1,17 @@
+use std.json
+
+@schema
+struct User {
+  name: String @min_len(1)
+  email: String @min_len(5)
+  age: Int @range(0, 150)
+}
+
+fn main() {
+  let user = User {
+    name: "Alice",
+    email: "alice@example.com",
+    age: 30,
+  }
+  println(json.encode(user))
+}

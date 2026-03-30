@@ -1,0 +1,58 @@
+# Klar Language — Cursor Rules
+
+You are writing code in Klar, an AI-first programming language. Read LANGUAGE_SPEC.md for the complete syntax reference.
+
+## Key Rules
+
+1. **No null, no exceptions.** Use `Option[T]` for optional values, `Result[T] ! E` for errors.
+2. **One way to do things.** Don't offer alternatives — there is exactly one correct pattern.
+3. **All types inferred in function bodies.** Only annotate function signatures.
+4. **Newlines separate statements.** No semicolons. Struct fields on separate lines (no commas).
+5. **Last expression is return value.** No explicit `return` needed for the last expression.
+6. **Use `match` exhaustively.** Every enum variant must be handled.
+7. **Pipe operator `|>` for chaining.** Prefer `x |> f |> g` over `g(f(x))`.
+8. **String interpolation with `{}`**: `"Hello, {name}!"` — no template literals or concatenation.
+
+## Error Handling Pattern
+
+```klar
+fn divide(a: Int, b: Int) -> Int ! MathError {
+  if b == 0 {
+    return Err(MathError.DivideByZero)
+  }
+  a / b
+}
+
+// Use ? to propagate, catch/else to handle
+let result = divide(10, 0)?                    // propagate
+let safe = divide(10, 0) catch err { 0 }       // handle with default
+let value = get_user(id) else { default_user }  // unwrap Option
+```
+
+## Standard Library Modules
+
+Use `std.*` modules: `string`, `list`, `map`, `set`, `json`, `math`, `io`, `env`, `time`, `crypto`, `log`, `http`, `sql`, `ws`, `redis`, `auth`
+
+Import with: `use std.http.{Router, Request, Response, serve}`
+
+## HTTP API Pattern
+
+```klar
+use std.http.{Router, Request, Response, serve}
+
+@schema
+struct User {
+  name: String @min_len(1)
+  email: String
+}
+
+fn get_user(req: Request) -> Response {
+  Response.json(User { name: "Alice", email: "alice@example.com" })
+}
+
+fn main() {
+  let router = Router.new()
+  router.get("/user/:id", get_user)
+  serve(router, 3000)
+}
+```

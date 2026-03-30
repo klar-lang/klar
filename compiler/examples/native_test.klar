@@ -1,0 +1,35 @@
+fn double(x: Int) -> Int {
+  x * 2
+}
+
+fn abs_val(x: Int) -> Int {
+  if x < 0 {
+    -x
+  } else {
+    x
+  }
+}
+
+fn fib(n: Int) -> Int {
+  if n < 2 {
+    n
+  } else {
+    fib(n - 1) + fib(n - 2)
+  }
+}
+
+fn main() {
+  println(double(21))
+  println(abs_val(-42))
+  println(fib(10))
+}
+
+test double_works {
+  assert double(5) == 10
+  assert double(0) == 0
+}
+
+test abs_works {
+  assert abs_val(-5) == 5
+  assert abs_val(5) == 5
+}

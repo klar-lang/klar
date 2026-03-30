@@ -1,0 +1,18 @@
+id: "007"
+title: "Reverse String"
+category: "string_manipulation"
+difficulty: "easy"
+prompt: |
+  Write a Klar function called `reverse` that takes a `s: String` parameter
+  and returns the string reversed.
+solution: |
+  fn reverse(s: String) -> String {
+      s |> std.string.reverse()
+  }
+test: |
+  test reverse {
+      assert_eq(reverse("hello"), "olleh")
+      assert_eq(reverse(""), "")
+      assert_eq(reverse("a"), "a")
+      assert_eq(reverse("abcd"), "dcba")
+  }

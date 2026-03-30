@@ -1,0 +1,25 @@
+id: "006"
+title: "Max of Three"
+category: "basics"
+difficulty: "easy"
+prompt: |
+  Write a Klar function called `max3` that takes three `Int` parameters
+  `a`, `b`, and `c`, and returns the largest of the three.
+solution: |
+  fn max3(a: Int, b: Int, c: Int) -> Int {
+      if a >= b and a >= c {
+          a
+      } else if b >= c {
+          b
+      } else {
+          c
+      }
+  }
+test: |
+  test max3 {
+      assert_eq(max3(1, 2, 3), 3)
+      assert_eq(max3(3, 2, 1), 3)
+      assert_eq(max3(1, 3, 2), 3)
+      assert_eq(max3(5, 5, 5), 5)
+      assert_eq(max3(-1, -2, -3), -1)
+  }

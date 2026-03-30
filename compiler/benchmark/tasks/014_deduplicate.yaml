@@ -1,0 +1,27 @@
+id: "014"
+title: "Remove Duplicates"
+category: "data_structures"
+difficulty: "medium"
+prompt: |
+  Write a Klar function called `deduplicate` that takes an `items: List[Int]`
+  parameter and returns a new list with duplicate elements removed,
+  preserving the order of first occurrences.
+solution: |
+  fn deduplicate(items: List[Int]) -> List[Int] {
+      let mut seen = Map.new()
+      let mut result = []
+      items |> std.list.each(|x| {
+          if !(seen |> Map.contains(x)) {
+              seen = seen |> Map.insert(x, true)
+              result = result |> std.list.append(x)
+          }
+      })
+      result
+  }
+test: |
+  test deduplicate {
+      assert_eq(deduplicate([1, 2, 2, 3, 3, 3]), [1, 2, 3])
+      assert_eq(deduplicate([1, 2, 3]), [1, 2, 3])
+      assert_eq(deduplicate([]), [])
+      assert_eq(deduplicate([5, 5, 5]), [5])
+  }

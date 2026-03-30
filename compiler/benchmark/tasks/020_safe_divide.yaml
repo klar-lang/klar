@@ -1,0 +1,23 @@
+id: "020"
+title: "Safe Divide"
+category: "error_handling"
+difficulty: "easy"
+prompt: |
+  Write a Klar function called `safe_divide` that takes `a: Float` and
+  `b: Float` parameters and returns the result of a / b. If b is zero,
+  return 0.0 instead of causing an error.
+solution: |
+  fn safe_divide(a: Float, b: Float) -> Float {
+      if b == 0.0 {
+          0.0
+      } else {
+          a / b
+      }
+  }
+test: |
+  test safe_divide {
+      assert_eq(safe_divide(10.0, 2.0), 5.0)
+      assert_eq(safe_divide(10.0, 0.0), 0.0)
+      assert_eq(safe_divide(0.0, 5.0), 0.0)
+      assert_eq(safe_divide(7.5, 2.5), 3.0)
+  }

@@ -1,0 +1,30 @@
+// Hello World API in Klar
+use std.http.{Router, Request, Response, serve}
+use std.json
+
+@schema
+struct Greeting {
+    message: String   @min_len(1)
+    timestamp: String
+}
+
+fn main() ! ServerError {
+    let router = Router.new()
+        |> Router.get("/hello/{name}", hello)
+    serve(router, port: 3000)?
+}
+
+fn hello(req: Request) -> Response ! AppError {
+    let name = req.param("name")
+    let greeting = Greeting {
+        message: "Hello, {name}!",
+        timestamp: "2026-03-30",
+    }
+    Response.json(greeting, status: 200)
+}
+
+test hello_handler {
+    let req = Request.get("/hello/world")
+    let res = hello(req)
+    assert res.status == 200
+}
